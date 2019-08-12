@@ -45,6 +45,6 @@ describe('Data fetching with mockedData', ()=>{
           ];
         await runSaga(fakeStore, getApiData).done;
         expect(dispatchedActions).toEqual(expectedActions);
-        console.log(dispatchedActions);
+        //console.log(dispatchedActions);
     });
 });

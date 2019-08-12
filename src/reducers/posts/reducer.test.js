@@ -13,7 +13,7 @@ describe('Posts Reducer', () => {
             type: types.GET_API_DATA,
             payload: "anything"
         });
-        expect(newState).toEqual({...state, loading: true, error: null});
+        expect(newState).toEqual({...state, loading: true, error: ''});
     });
 
     it('Should return new state and loading = false if type is API_DATA_RECEIVED', () => {
@@ -22,7 +22,7 @@ describe('Posts Reducer', () => {
             type: types.API_DATA_RECEIVED,
             payload: payload
         });
-        expect(newState).toEqual({...state, payload: payload, loading: false, error: null});
+        expect(newState).toEqual({...state, payload: payload, loading: false, error: ''});
     });
 
     it('Should return loading = false and an error message if type is REQUEST_ERROR', () => {
