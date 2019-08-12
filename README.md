@@ -1,68 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Weather App
+v1: melbourne only
+City
+    weather
+        Temp
 
-## Available Scripts
+Day today?
+    hourly forecast from now
+        time
+        logo
+        temp
+day
+...
 
-In the project directory, you can run:
+Today: description
+details:
+    sunrise sunset
+    chance of rain  humidity
+    wind    feels like
+    precipitation   pression
+    visibility  UV index
+    
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    Enter town or postcode (http://v0.postcodeapi.com.au/suburbs/3066.json)
+        dispatch town/put postcode
+    Cityname to time:
+    Cityname to weather:
+    https://api.openweathermap.org/data/2.5/weather?q=Perth,AU&cnt=1&units=metric&APPID=f218cbbb0b02c7e49e39d98710036bb4
+    
+     
+localStorage: the city
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+reducer:
+    standardized city name
+    weather
+    time
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+datetime:
 
-### `npm run build`
+var offset = 36000;
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+var utc = Date.now();
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+var locale = utc + offset*1000;
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+console.log(new Date(locale).toUTCString());
