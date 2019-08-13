@@ -53,10 +53,10 @@ describe('Text input component', ()=>{
             wrapper = shallow(<SharedTextInput {...props} />);
         });
 
-        it('Should update state with the text entered on bluring', ()=>{
+        it('Should update state on text change', ()=>{
             const component = wrapper.find('input[type="text"]');
             const testingData = "any string";
-            component.simulate('blur', {target: {value: testingData}});
+            component.simulate('change', {target: {value: testingData}});
             expect(wrapper.state().textEntered).toBe(testingData);
         });
     });
@@ -73,10 +73,10 @@ describe('Text input component', ()=>{
             wrapper = shallow(<SharedTextInput {...props} />);
         });
 
-        it('Should fire the emit function with the value entered in the text box on bluring', ()=>{
+        it('Should fire the emit function with the text entered on text change', ()=>{
             const component = wrapper.find('input[type="text"]');
             const testingData = "any string";
-            component.simulate('blur', {target: {value: testingData}});
+            component.simulate('change', {target: {value: testingData}});
             expect(mockedFunction).toHaveBeenCalledWith(testingData);
         });
     });

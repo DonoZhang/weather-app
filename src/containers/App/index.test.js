@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './index';
 import SharedButton from '../../components/button/index';
+import SharedTextInput from '../../components/input/index';
 import { findByTestAttr, testStore } from '../../../Utilities/utilities';
 import Error from '../../components/Error/index';
 import Loading from '../../components/Loading/index';
@@ -26,7 +27,7 @@ describe('The App component connected with store '+
     it('Should have a search component, which includes a text input and button', ()=>{
       const component = findByTestAttr(wrapper, 'city-search');
       expect(component.length).toBe(1);
-      const input = findByTestAttr(component, 'city-input');
+      const input = component.find(SharedTextInput);
       expect(input.length).toBe(1);
       const button = component.find(SharedButton);
       expect(button.length).toBe(1);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SharedButton from '../../components/button/index'
+import SharedButton from '../../components/button/index';
+import SharedTextInput from '../../components/input/index';
 import Error from '../../components/Error/index';
 import Loading from '../../components/Loading/index';
 import Weather from '../../components/Weather/index';
@@ -51,6 +52,11 @@ class App extends Component{
     }
 
     render(){
+        const configTextInput = {
+            placeHolder: "Please enter the town name",
+            emitEvent: (message)=>{console.log(message)}
+        }
+
         const configButton = {
             buttonText: "Change City",
             emitEvent: this.props.fetchWeatherData
@@ -59,7 +65,7 @@ class App extends Component{
         return (
             <div className='app'>
                 <div className='city-search' data-test="city-search">
-                    <input type="text" data-test='city-input' placeholder="Please Enter town name" />
+                    <SharedTextInput {...configTextInput}/>
                     <SharedButton {...configButton}/>
                 </div>
                 <div className='page-display'  data-test='page-display'>

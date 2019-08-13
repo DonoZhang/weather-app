@@ -15,20 +15,21 @@ class SharedTextInput extends Component{
         }
     }
 
-    onTextInputBlur = (event)=>{
+    onTextChange = (event)=>{
         const input = event.target.value;
         this.setState(
             {
                 textEntered: input
             }
         );
+        if(this.props.emitEvent)
         this.props.emitEvent(input);
     }
 
     render(){
         return (
             <div className="text-input" data-test="text-input">
-                <input type="text" placeholder={this.props.placeholder} onBlur={this.onTextInputBlur} value={this.state.textEntered} />
+                <input type="text" placeholder={this.props.placeholder} onChange={this.onTextChange} value={this.state.textEntered} />
             </div>
         );
     }
