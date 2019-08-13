@@ -6,6 +6,7 @@ import Loading from '../../components/Loading/index';
 import Weather from '../../components/Weather/index';
 import { connect } from 'react-redux';
 import { actions } from '../../actions/actions';
+import { payloadToProps } from './payloadToProps';
 import './index.scss';
 
 class App extends Component{
@@ -24,7 +25,13 @@ class App extends Component{
     }
 
     componentDidMount(){
-        this.props.fetchWeatherData();
+       this.weatherUpdate();
+       //update weather per half hour
+       this.weatherUpdateTimer = setInterval(this.weatherUpdate, 1800000);
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.weatherUpdateTimer);
     }
 
     _checkStatus = ()=>{
@@ -35,7 +42,12 @@ class App extends Component{
         if(loading){
             return <Loading />;
         }
-        return <Weather payload={payload}/>
+        const props = payloadToProps(payload);
+        return <Weather {...props}/>
+    }
+
+    weatherUpdate = ()=>{
+        this.props.fetchWeatherData();
     }
 
     render(){

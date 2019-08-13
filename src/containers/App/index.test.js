@@ -6,6 +6,7 @@ import { findByTestAttr, testStore } from '../../../Utilities/utilities';
 import Error from '../../components/Error/index';
 import Loading from '../../components/Loading/index';
 import Weather from '../../components/Weather/index';
+import examplePayload from './examplePayload';
 import '../../setupTests';
 
 describe('The App component connected with store '+
@@ -37,7 +38,7 @@ describe('The App component connected with store '+
     });
   });
 
-  describe('Page rendering', ()=>{
+  describe('Page rendering integration test', ()=>{
     let wrapper;
     it('Should display the error page when there is an error with fetching data', ()=>{
       const initialState = {
@@ -69,7 +70,7 @@ describe('The App component connected with store '+
     it('Should show the weather page when data received from api', ()=>{
       const initialState = {
         post:{
-          payload: {},
+          payload: examplePayload,
           loading: false,
           error: ""
         }
