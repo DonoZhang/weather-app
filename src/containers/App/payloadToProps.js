@@ -8,7 +8,7 @@ export const payloadToProps = (payload)=>{
         icon: payload.weather[0].icon,
         temperature: payload.main.temp,
         temperatureLow: payload.main.temp_min,
-        temperatureHight: payload.main.temp_max,
+        temperatureHigh: payload.main.temp_max,
         visibility: payload.visibility,
         windSpeed: payload.wind.speed,
         windDegree: payload.wind.deg,

@@ -29,6 +29,10 @@ details:
     https://api.openweathermap.org/data/2.5/weather?q=Perth,AU&cnt=1&units=metric&APPID=f218cbbb0b02c7e49e39d98710036bb4
     
      
+deal with no internet 
+allow user to add favorite cities
+allow user to select celcius, farenheit ...
+
 localStorage: the city
 
 reducer:

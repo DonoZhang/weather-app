@@ -40,11 +40,25 @@ class Weather extends Component{
                 <div className="city-name" data-test="city-name">
                     {city}
                 </div>
+                <div className="time-component" data-test="time-component">
+                    {this.state.time}
+                </div>
+                <div className="weather-icon" data-test="weather-icon">
+                    <img src={`https://openweathermap.org/img/w/${weather.icon}.png`} alt="weather logo"/>
+                </div>
                 <div className="weather-brief" data-test="weather-brief">
                     {weather.weatherBrief}
                 </div>
-                <div className="time-component" data-test="time-component">
-                    {this.state.time}
+                <div className="temperature" data-test="temperature">
+                    {weather.temperature}&#8451;
+                </div>
+                <div className="temperature-range" data-test="temperature-range">
+                    <div className="temperature-highest" data-test="temperature-highest">
+                        {weather.temperatureHigh}&#8451;
+                    </div>
+                    <div className="temperature-lowest" data-test="temperature-lowest">
+                        {weather.temperatureLow}&#8451;
+                    </div>
                 </div>
             </div>
         );
