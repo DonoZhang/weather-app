@@ -1,0 +1,21 @@
+@import '../../variables';
+
+.button-component{
+    font: { 
+        family: $font;
+        size: 14px;
+    }
+
+    color: $text-color;
+    background: $background-color;
+    cursor: pointer;
+    box-shadow: 0 0.5px 1px $shadow-color;
+
+    &:hover{
+        opacity: 0.8;
+    }
+
+    &:active{
+        opacity: 0.5;
+    }
+}

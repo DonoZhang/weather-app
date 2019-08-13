@@ -36,11 +36,11 @@ class App extends Component{
 
     _checkStatus = ()=>{
         const {payload, loading, error} = this.props;
-        if(error.length > 0){
-            return <Error errorMessage={error}/>;
-        }
         if(loading){
             return <Loading />;
+        }
+        if(error.length > 0){
+            return <Error errorMessage={error}/>;
         }
         const props = payloadToProps(payload);
         return <Weather {...props}/>

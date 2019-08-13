@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './_index.scss';
 
 class SharedButton extends Component {
     static propTypes = {
@@ -16,9 +17,9 @@ class SharedButton extends Component {
     render(){
         const { buttonText } = this.props;
         return (
-            <button data-test="buttonComponent" onClick={this.onSubmit}>
+            <a className="button-component" data-test="buttonComponent" onClick={this.onSubmit}>
                 {buttonText}
-            </button>
+            </a>
         );
     }
 }

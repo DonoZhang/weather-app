@@ -1,7 +1,7 @@
 @import '../../_variables.scss';
 
 .weather-page{
-    font-family: sans-serif;
+    font-family: $font;
     background: $background-color;
     max-width: 100%;
     padding: 50px 100px 80px;
