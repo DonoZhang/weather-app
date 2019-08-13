@@ -5,4 +5,4 @@ import rootSaga from './sagas/saga';
 
 export const sagaMiddleware = createSagaMiddleware();
 export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-export const runSaga = ()=>{sagaMiddleware.run(rootSaga);}
+export const runSaga = ()=>{sagaMiddleware.run(rootSaga, "Parkville");}

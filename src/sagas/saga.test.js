@@ -32,7 +32,7 @@ describe('Data fetching flow', ()=>{
 });
 
 describe('Integration test with mockedData', ()=>{
-    it('When there is an internet connection, it should dispatch two actions and the second has the mockedData as payload'
+    it('When everything works, it should dispatch two actions and the second has the mockedData as payload'
     , async ()=>{
         const dispatchedActions = [];
         const mockedData = {title: 'I am a JSON file', format: 'JSON'};
