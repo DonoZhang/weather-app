@@ -7,7 +7,7 @@ import Weather from '../../components/Weather/index';
 import { connect } from 'react-redux';
 import { actions } from '../../actions/actions';
 import { payloadToProps } from './payloadToProps';
-import './index.scss';
+import './_index.scss';
 
 class App extends Component{
     static propTypes = {

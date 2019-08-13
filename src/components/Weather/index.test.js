@@ -55,30 +55,26 @@ describe('Weather Page', ()=>{
             expect(component.text()).toBe(time);
         });
 
-        it('Should render an icon for the current weather', ()=>{
-            const component = findByTestAttr(wrapper, 'weather-icon');
-            expect(component.length).toBe(1);
+        it('Should render an icon for the current weather and the weather brief', ()=>{
+            const componentWrapper = findByTestAttr(wrapper, 'weather-information');
+            const componentIcon = findByTestAttr(componentWrapper, 'weather-icon');
+            expect(componentIcon.length).toBe(1);
             const expectedSrc = `https://openweathermap.org/img/w/${props.weather.icon}.png`;
-            expect(component.find('img').prop('src')).toBe(expectedSrc);
+            expect(componentIcon.find('img').prop('src')).toBe(expectedSrc);
+            const componentBrief = findByTestAttr(componentWrapper, 'weather-brief');
+            expect(componentBrief.length).toBe(1);
+            expect(componentBrief.text()).toBe(props.weather.weatherBrief);
         });
 
-        it('Should render the current weather brief assigned by property', ()=>{
-            const component = findByTestAttr(wrapper, 'weather-brief');
-            expect(component.length).toBe(1);
-            expect(component.text()).toBe(props.weather.weatherBrief);
-        });
-
-        it('Should render the current temperature', ()=>{
-            const component = findByTestAttr(wrapper, 'temperature');
-            expect(component.length).toBe(1);
-            expect(component.text()).toBe( props.weather.temperature + "℃");
-        });
-
-        it('Should render the temperature range of the day, which includes the highest temperature and the lowest', ()=>{
-            const component = findByTestAttr(wrapper, 'temperature-range');
-            expect(component.length).toBe(1);
-            const componentHighest = findByTestAttr(component, 'temperature-highest');
-            const componentLowest = findByTestAttr(component, 'temperature-lowest');
+        it('Should render the current temperature and a temperature range', ()=>{
+            const componentWrapper = findByTestAttr(wrapper, 'temperature');
+            const componentCurrent = findByTestAttr(componentWrapper, 'temperature-current');
+            expect(componentCurrent.length).toBe(1);
+            expect(componentCurrent.text()).toBe( props.weather.temperature + "℃");
+            const componentRange = findByTestAttr(componentWrapper, 'temperature-range');
+            expect(componentRange.length).toBe(1);
+            const componentHighest = findByTestAttr(componentRange, 'temperature-highest');
+            const componentLowest = findByTestAttr(componentRange, 'temperature-lowest');
             expect(componentHighest.length).toBe(1);
             expect(componentHighest.text()).toBe(props.weather.temperatureHigh + "℃");
             expect(componentLowest.length).toBe(1);

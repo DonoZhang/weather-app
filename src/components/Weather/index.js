@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { offsetToTime } from './utilities';
+import './_index.scss';
 
 class Weather extends Component{
     static propTypes = {
@@ -43,21 +44,25 @@ class Weather extends Component{
                 <div className="time-component" data-test="time-component">
                     {this.state.time}
                 </div>
-                <div className="weather-icon" data-test="weather-icon">
-                    <img src={`https://openweathermap.org/img/w/${weather.icon}.png`} alt="weather logo"/>
-                </div>
-                <div className="weather-brief" data-test="weather-brief">
-                    {weather.weatherBrief}
+                <div className="weather-information" data-test="weather-information">
+                    <div className="weather-icon" data-test="weather-icon">
+                        <img src={`https://openweathermap.org/img/w/${weather.icon}.png`} alt="weather logo"/>
+                    </div>
+                    <div className="weather-brief" data-test="weather-brief">
+                        {weather.weatherBrief}
+                    </div>
                 </div>
                 <div className="temperature" data-test="temperature">
-                    {weather.temperature}&#8451;
-                </div>
-                <div className="temperature-range" data-test="temperature-range">
-                    <div className="temperature-highest" data-test="temperature-highest">
-                        {weather.temperatureHigh}&#8451;
+                    <div className="temperature-current" data-test="temperature-current">
+                        {weather.temperature}&#8451;
                     </div>
-                    <div className="temperature-lowest" data-test="temperature-lowest">
-                        {weather.temperatureLow}&#8451;
+                    <div className="temperature-range" data-test="temperature-range">
+                        <div className="temperature-highest" data-test="temperature-highest">
+                            {weather.temperatureHigh}&#8451;
+                        </div>
+                        <div className="temperature-lowest" data-test="temperature-lowest">
+                            {weather.temperatureLow}&#8451;
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,53 @@
+@import '../../_variables.scss';
+
+.weather-page{
+    font-family: sans-serif;
+    background: $background-color;
+    max-width: 100%;
+    padding: 50px 100px 80px;
+    color: $text-color;
+    
+    .city-name{
+        font-size: 40px;
+    }
+
+    .time-component{
+        padding: 20px 0;
+    }
+
+    .weather-information{
+        padding: 0 80px 20px;
+
+        *{
+            display: inline-block;
+            vertical-align: middle;
+            font: {
+                size: 26px;
+                weight: 500;
+            }
+        }
+ 
+        img{
+        width: 60px;
+        height: auto;
+        }
+    }
+
+    .temperature{
+        padding: 0 90px;
+
+        &>*{
+            display: inline-block;
+        }
+
+        .temperature-current{
+            font-size: 40px;
+        }
+
+        .temperature-range{
+            padding-left:20px; 
+        }
+        
+    }
+    
+}
