@@ -1,1 +1,20 @@
 @import '../../variables';
+
+.text-input{
+    display: inline-block;
+    position: relative;
+
+    input{
+        border: none;
+        width: 150px;
+        text-overflow: ellipsis;
+        color: $input-text-color;
+        outline: none;
+        background-color: $input-background-color;
+        box-shadow: 0 0 0.5px $shadow-color;
+
+        &::placeholder{
+            color: $input-text-color;
+        }
+    }
+}

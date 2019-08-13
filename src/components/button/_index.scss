@@ -1,11 +1,12 @@
 @import '../../variables';
 
 .button-component{
+    border: none;
+    outline: none;
     color: $text-color;
     background: $background-color;
     cursor: pointer;
-    box-shadow: 0 0.5px 1px $shadow-color;
-    text-decoration: none;
+    box-shadow: 0 0 0.5px $background-color;
 
     font: { 
         family: $font;

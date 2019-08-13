@@ -53,7 +53,7 @@ class App extends Component{
 
     render(){
         const configTextInput = {
-            placeHolder: "Please enter the town name",
+            placeholder: "Please enter the town name",
             emitEvent: (message)=>{console.log(message)}
         }
 
