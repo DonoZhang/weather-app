@@ -33,11 +33,8 @@ class App extends Component{
         }
     }
 
-    componentWillMount(){
-        this.setState({city: this.props.city});
-    }
-
     componentDidMount(){
+       this.setState({city: this.props.city});
        this.weatherUpdate();
        //update weather per half hour
        this.weatherUpdateTimer = setInterval(this.weatherUpdate, 1800000);
