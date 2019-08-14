@@ -12,8 +12,7 @@ describe('Actions generator', ()=>{
 
     it('Should return a get api data action', ()=>{
         const actionExpected = {
-            type: types.GET_API_DATA,
-            payload: undefined
+            type: types.GET_API_DATA
         };
         const action = actions.requestApiData();
         expect(action).toStrictEqual(actionExpected);
@@ -29,13 +28,23 @@ describe('Actions generator', ()=>{
         expect(action).toStrictEqual(actionExpected);
     });
 
-    it('Should return a error message action', ()=>{
+    it('Should return an error message action', ()=>{
         const error = "error message";
         const actionExpected = {
             type: types.REQUEST_ERROR,
             error: error
         };
         const action = actions.getErrorMessage(error);
+        expect(action).toStrictEqual(actionExpected);
+    });
+
+    it('Should return a setting city action', ()=>{
+        const testingCity = "Melbourne";
+        const actionExpected = {
+            type: types.SET_CITY,
+            city: testingCity
+        }
+        const action = actions.setCity(testingCity);
         expect(action).toStrictEqual(actionExpected);
     });
 });

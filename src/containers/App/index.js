@@ -15,6 +15,7 @@ class App extends Component{
         payload: PropTypes.object,
         loading: PropTypes.bool,
         error: PropTypes.string,
+        city: PropTypes.string,
         fetchWeatherData: PropTypes.func
     }
 
@@ -23,6 +24,17 @@ class App extends Component{
         loading: false,
         error: "No error",
         fetchWeatherData: ()=>{console.log("Need to pass in a function")}
+    }
+
+    constructor(){
+        super();
+        this.state = {
+            city: undefined
+        }
+    }
+
+    componentWillMount(){
+        this.setState({city: this.props.city});
     }
 
     componentDidMount(){
@@ -47,6 +59,14 @@ class App extends Component{
         return <Weather {...props}/>
     }
 
+    onTextInputChange = (city)=>{
+        this.setState({city})
+    }
+
+    onSubmit = ()=>{
+        this.props.setCity(this.state.city);
+    }
+
     weatherUpdate = ()=>{
         this.props.fetchWeatherData();
     }
@@ -54,12 +74,15 @@ class App extends Component{
     render(){
         const configTextInput = {
             placeholder: "Please enter the town name",
-            emitEvent: (message)=>{console.log(message)}
+            emitEvent: this.onTextInputChange
         }
 
         const configButton = {
             buttonText: "Change City",
-            emitEvent: this.props.fetchWeatherData
+            emitEvent: ()=>{
+                this.onSubmit();
+                this.props.fetchWeatherData();
+            }
         }
         
         return (
@@ -77,17 +100,20 @@ class App extends Component{
 }
 
 const mapStateToProps = state => {
-    const post = state.post;
+    const post = state.posts;
+    const city = state.city.city;
     return {
         payload: post.payload,
         loading: post.loading,
-        error: post.error
+        error: post.error,
+        city
     };
 }
 
 const mapDispatchToProps = dispatch =>{
     return {
-        fetchWeatherData: () => dispatch(actions.fireSaga())
+        fetchWeatherData: () => dispatch(actions.fireSaga()),
+        setCity: city => dispatch(actions.setCity(city))
     }
 }
 

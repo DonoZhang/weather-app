@@ -9,6 +9,7 @@ import Loading from '../../components/Loading/index';
 import Weather from '../../components/Weather/index';
 import examplePayload from './examplePayload';
 import '../../setupTests';
+import { actions } from '../../actions/actions';
 
 describe('The App component connected with store '+
   '(This test needs your redux-saga version to support mock store)', ()=>{
@@ -21,8 +22,7 @@ describe('The App component connected with store '+
   describe('App Render', ()=>{
     let wrapper;
     beforeEach(() => {
-      const initialState = {};
-      wrapper = setUp(initialState);
+      wrapper = setUp();
     }); 
     it('Should have a search component, which includes a text input and button', ()=>{
       const component = findByTestAttr(wrapper, 'city-search');
@@ -39,11 +39,42 @@ describe('The App component connected with store '+
     });
   });
 
+  describe('City setting integration test', ()=>{
+    describe('City dispatch', ()=>{
+      const mockedFunction = jest.fn();
+      const testingCity = "Testing City";
+      const initialState = {
+        city:{
+          city: testingCity
+        }
+      }
+      const store = testStore(initialState);
+      store.dispatch = mockedFunction;
+      const wrapper = shallow(<App store={store} />).childAt(0).dive();
+
+      it("Should update city state with anything user entered in SharedTextInput", ()=>{
+        const component = wrapper.find(SharedTextInput).dive().find('input[type="text"]');
+        const testingMessage = "Any message";
+        component.simulate('change', {target:{value: testingMessage}});
+        expect(wrapper.state().city).toBe(testingMessage);
+      });
+      
+      it('Should dispatch a setting city action with the city state' +
+        ' when user clicks SharedButton', ()=>{
+        const component = wrapper.find(SharedButton).dive().find('button');
+        const city = wrapper.state().city;
+        const expectedAction = actions.setCity(city);
+        component.simulate('click');
+        expect(mockedFunction).toHaveBeenCalledWith(expectedAction);
+      });
+    });
+  });
+
   describe('Page rendering integration test', ()=>{
     let wrapper;
     it('Should display the error page when there is an error with fetching data', ()=>{
       const initialState = {
-        post:{
+        posts:{
           payload: {},
           loading: false,
           error: "An error"
@@ -57,7 +88,7 @@ describe('The App component connected with store '+
 
     it('Should display the loading page when getting data from api', ()=>{
       const initialState = {
-        post:{
+        posts:{
           payload: {},
           loading: true,
           error: ""
@@ -70,7 +101,7 @@ describe('The App component connected with store '+
 
     it('Should show the weather page when data received from api', ()=>{
       const initialState = {
-        post:{
+        posts:{
           payload: examplePayload,
           loading: false,
           error: ""
