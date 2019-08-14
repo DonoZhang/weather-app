@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './_index.scss';
 
 class Error extends Component{
     static propTypes = {

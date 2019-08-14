@@ -1,0 +1,17 @@
+@import '../../variables';
+
+.error-page{
+    font-family: $font;
+    max-width: 100%;
+    background: $error-background-color;
+    box-shadow: 0 0 0.5px $shadow-color;
+    
+    .error-message{
+        padding: 100px 40px;
+
+        p{
+          color: $error-color; 
+          font-size: 30px;
+        }
+    }
+}

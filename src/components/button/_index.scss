@@ -4,9 +4,9 @@
     border: none;
     outline: none;
     color: $text-color;
-    background: $background-color;
+    background: $app-background-color;
     cursor: pointer;
-    box-shadow: 0 0 0.5px $background-color;
+    box-shadow: 0 0 0.5px $app-background-color;
 
     font: { 
         family: $font;
