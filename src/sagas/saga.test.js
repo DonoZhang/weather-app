@@ -1,24 +1,29 @@
 import { put, call } from 'redux-saga/effects';
 import * as api from './api';
 import * as saga from './saga';
-import { initState } from '../reducers/city/reducer';
-import { types } from '../actions/types';
 import { actions } from '../actions/actions';
 import { runSaga } from 'redux-saga';
 import { cloneableGenerator } from '@redux-saga/testing-utils';
+import { store } from '../createStore';
 
 describe('Data fetching flow step test', ()=>{
     const generator = cloneableGenerator(saga.getApiData)();
 
-    it('Should go through the first steps', ()=>{
+    it('Should go through the first step, fire the requestApiData action', ()=>{
         expect(generator.next().value).toEqual(
-            put({type: types.GET_API_DATA, payload: null})
+            put(actions.requestApiData())
         );
     });
 
-    it('Should go through the second step that pass "city" stored in redux to api', ()=>{
-        //in testing model, "city" stored in redux is defined by cityReducer's initState defaultly
-        expect(generator.next().value).toEqual(call(api.fetchData, initState.city));
+    it('Should go through the second step, find city stored in redux', ()=>{
+        expect(generator.next().value).toEqual(
+            store.getState().city.city
+        );
+    });
+
+    it('Should go through the third step that pass city to api', ()=>{
+        const city = "testing city";
+        expect(generator.next(city).value).toEqual(call(api.fetchData, city));
     });
 
     it('Should then go through branching steps as expected', ()=>{
@@ -55,11 +60,8 @@ describe('Data fetching integration test with mockedData', ()=>{
                 dispatch: action => dispatchedActions.push(action)
             };
             const expectedActions = [
-                { type: types.GET_API_DATA, payload: null },
-                {
-                type: types.API_DATA_RECEIVED,
-                payload: mockedData
-                }
+                actions.requestApiData(),
+                actions.receiveApiData(mockedData)
             ];
             await runSaga(fakeStore, saga.getApiData).done;
             expect(dispatchedActions).toEqual(expectedActions);
@@ -77,11 +79,8 @@ describe('Data fetching integration test with mockedData', ()=>{
                 dispatch: action => dispatchedActions.push(action)
             };
             const expectedActions = [
-                { type: types.GET_API_DATA, payload: null },
-                {
-                type: types.REQUEST_ERROR,
-                error: saga.fetchingErrorMessage
-                }
+                actions.requestApiData(),
+                actions.getErrorMessage(saga.fetchingErrorMessage)
             ];
             await runSaga(fakeStore, saga.getApiData).done;
             expect(dispatchedActions).toEqual(expectedActions);
@@ -96,11 +95,8 @@ describe('Data fetching integration test with mockedData', ()=>{
                 dispatch: action => dispatchedActions.push(action)
             };
             const expectedActions = [
-                { type: types.GET_API_DATA, payload: null },
-                {
-                type: types.REQUEST_ERROR,
-                error: saga.cityErrorMessage
-                }
+                actions.requestApiData(),
+                actions.getErrorMessage(saga.cityErrorMessage)
             ];
             await runSaga(fakeStore, saga.getApiData).done;
             expect(dispatchedActions).toEqual(expectedActions);
@@ -115,11 +111,8 @@ describe('Data fetching integration test with mockedData', ()=>{
                 dispatch: action => dispatchedActions.push(action)
             };
             const expectedActions = [
-                { type: types.GET_API_DATA, payload: null },
-                {
-                type: types.REQUEST_ERROR,
-                error: saga.unknownErrorMessage
-                }
+                actions.requestApiData(),
+                actions.getErrorMessage(saga.unknownErrorMessage)
             ];
             await runSaga(fakeStore, saga.getApiData).done;
             expect(dispatchedActions).toEqual(expectedActions);

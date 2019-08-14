@@ -1,5 +1,4 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { types } from '../actions/types';
 import { actions } from '../actions/actions';
 import { fetchData, fetchingError, cityError, unknownError } from './api';
 import { store } from '../createStore';
@@ -9,8 +8,8 @@ export const cityErrorMessage = "Sorry, we cannot find the town you are looking 
 export const unknownErrorMessage = "Sorry, unknown error happened";
 
 export function* getApiData() {
-  const city = store.getState().city.city;
-  yield put({type: types.GET_API_DATA, payload: null});
+  yield put(actions.requestApiData());
+  const city = yield store.getState().city.city;
   try{
     const data = yield call(fetchData, city);
     switch(data){
@@ -37,7 +36,7 @@ export function* getApiData() {
 }
 
 function* rootSaga() {
-   yield takeLatest(types.FIRE_SAGA, getApiData);
+   yield takeLatest(actions.fireSaga().type, getApiData);
 }
 
 export default rootSaga;
